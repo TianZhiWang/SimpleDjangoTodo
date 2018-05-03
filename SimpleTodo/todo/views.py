@@ -17,7 +17,6 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-
 class TodoViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows todos to be viewed or edited.

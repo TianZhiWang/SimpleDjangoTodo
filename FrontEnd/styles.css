@@ -1,0 +1,9 @@
+.todo {
+    padding-bottom: 2px;
+}
+
+.todo .form-control {
+    display: inline;
+    width: 65%;
+    vertical-align: middle;
+}

@@ -24,7 +24,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class TodoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = TodoItem
-        fields = ('id', 'completed', 'description')
+        fields = ('url', 'completed', 'description')
 
     def create(self, validated_data):
         owner = self.context['request'].user

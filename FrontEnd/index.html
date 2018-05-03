@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Simple Todo</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app" class="container">
+        <h1>Simple Todo</h1>
+        <div v-if="!loggedIn">
+            <form @submit.prevent="login">
+                <h2>Please sign in</h2>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input v-model="username" class="form-control" placeholder="Username" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input v-model="password" class="form-control" type="password" id="inputPassword" placeholder="Password" required>
+                </div>
+                <button class="btn btn-primary" type="submit">Sign in</button>
+            </form>
+        </div>
+
+        <p>{{ logInStatus }}</p>
+
+        <ul class="list-unstyled todolist" v-if="loggedIn">
+            <li class="todo">
+                <input type="checkbox" v-model="newtodo.completed">
+                <input class="form-control" placeholder="New Todo" v-model="newtodo.description">
+                <button  class="btn btn-primary" v-on:click="addTodo">Add</button>
+            </li>
+            <br>            
+            <li class="todo" v-for="todo in todos">
+                <input type="checkbox" v-model="todo.completed" v-on:change="updateTodo(todo)">
+                <input class="form-control" v-model="todo.description" v-bind:placeholder="todo.description"
+                v-on:change="updateTodo(todo)">
+                <button class="btn btn-danger" v-on:click="deleteTodo(todo.url)">Delete</button>
+            </li>
+        </l>
+    </div>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

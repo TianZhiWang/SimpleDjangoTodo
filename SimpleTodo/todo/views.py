@@ -1,18 +1,28 @@
 from django.shortcuts import render
+from django.contrib.auth.models import User
 
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 
 from todo.models import TodoItem
-from todo.serializers import TodoSerializer
-from todo.permissions import IsOwner
+from todo.serializers import TodoSerializer, UserSerializer
+from todo.permissions import IsOwnerOrAdmin, UserPermissions
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    permission_classes = (UserPermissions,)
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 
 class TodoViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows todos to be viewed or edited.
     """
-    permission_classes = (IsOwner,)
+    permission_classes = (IsOwnerOrAdmin,)
     queryset = TodoItem.objects.all()
     serializer_class = TodoSerializer
 

@@ -21,7 +21,7 @@ class TodoViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows todos to be viewed or edited.
     """
-    permission_classes = (IsOwnerOrAdmin,)
+    permission_classes = (IsAuthenticated,IsOwnerOrAdmin,)
     queryset = TodoItem.objects.all()
     serializer_class = TodoSerializer
 
